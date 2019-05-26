@@ -10,12 +10,15 @@ let imgArray = [
     "./img/ball04.png"
 ];
 
-function enemyManager(generateRate) {
+function enemyManager() {
 
     let rand = Math.random(); //0~1の乱数
     if (rand < generateRate) {
         createEnemy();
     }
+
+    deleteEnemy(); // 画面外の敵を消す
+    moveEnemy(speed); // 敵の移動
 }
 
 function createEnemy() {
@@ -38,7 +41,7 @@ function createEnemy() {
     //画面に生成
     id = ++enemyCount;
     img = imgArray[type];
-    enemy = `<div class="enemy" id="enemy` + id + `"><img src="` + img + `" alt="enemy "></div>`;
+    enemy = `<div class="enemy" data-type="` + type + `" id="enemy` + id + `"><img src="` + img + `" alt="enemy "></div>`;
     $('.stage').append(enemy);
     $('#enemy' + id).css({
         top: 0,

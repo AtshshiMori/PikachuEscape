@@ -2,19 +2,20 @@
   Collision
 ********************************/
 
-function detectAllCollision() {
+// 衝突判定（-1: 衝突なし, 0~3: 敵のタイプ）
+function collisionManager() {
     let $enemy = $('.enemy');
     let $player = $('.player');
-    let collisionFlag = 0;
+    let collisionType = -1;
 
     $enemy.each(function (i, enemy) {
         let collision = detectCollision($player, $(enemy));
         if (collision) {
-            collisionFlag = 1; // 敵との衝突
+            collisionType = $(enemy).data("type"); // 衝突した敵のタイプを入れる
         }
     });
 
-    return collisionFlag; // 衝突なし
+    return collisionType; // -1は衝突なし。
 }
 
 function detectCollision($obj1, $obj2) {
